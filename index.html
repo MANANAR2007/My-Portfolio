@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background-color: black;
+      }
+
+      nav {
+        background-color: #3a3434;
+        display: flex;
+        color: aliceblue;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        border-radius: 10px;
+        border: 5px white solid;
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.4);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        flex-wrap: wrap;
+        backdrop-filter: blur(10px);
+      }
+
+      h1 span {
+        color: #ff9800;
+      }
+
+      nav h1 {
+        margin: 2px;
+        font-size: 30px;
+      }
+
+      nav div {
+        display: flex;
+        gap: 25px;
+      }
+
+      nav a {
+        color: aliceblue;
+        text-decoration: none;
+        font-weight: bold;
+        position: relative;
+        padding-bottom: 5px;
+      }
+
+      nav a:hover {
+        color: #ff9800;
+        transform: scale(1.05);
+        transition: all 0.3s ease;
+      }
+      nav a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 0%;
+        height: 2px;
+        background-color: #ff9800;
+        transition: width 0.3s ease;
+      }
+
+      nav a:hover::after {
+        width: 100%;
+      }
+
+      aside {
+        background-color: #3a3434;
+        width: 250px;
+        max-height: 80vh;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.4);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 5px white solid;
+        flex-shrink: 0;
+        position: sticky;
+        top: 100px;
+        gap: 10px;
+      }
+
+      main {
+        display: flex;
+        margin-top: 20px;
+        padding: 20px;
+      }
+
+      .photo {
+        height: 150px;
+        width: 150px;
+        border-radius: 50%;
+        border: 3px solid #ff9800;
+        object-fit: cover;
+        margin-bottom: 15px;
+      }
+
+      aside h2 {
+        margin: 10px 0 5px 0;
+        text-align: center;
+        color: #fff;
+        font-weight: 700;
+        letter-spacing: 1px;
+      }
+
+      aside p {
+        color: #3a3434;
+        font-size: 14px;
+        text-align: center;
+        background-color: white;
+        padding: 8px 12px;
+        border-radius: 10px;
+        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+        line-height: 1.4;
+        font-family: "Poppins", sans-serif;
+        font-weight: 500;
+        transition: background 0.3s, color 0.3s;
+      }
+
+      aside p:hover {
+        background-color: #ff9800;
+        color: white;
+      }
+
+      .btn {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 10px 20px;
+        background-color: black;
+        color: white;
+        font-weight: bold;
+        border-radius: 8px;
+        text-decoration: none;
+        text-align: center;
+        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+        transition: all 0.3s ease;
+      }
+
+      .btn:hover {
+        background-color: #ff9800;
+        color: white;
+        transform: scale(1.05);
+      }
+
+      .icons {
+        display: flex;
+        gap: 10px;
+        margin: 10px 0;
+      }
+      .icons img {
+        width: 32px;
+        height: 32px;
+        transition: transform 0.2s;
+        border-radius: 0;
+      }
+
+      .icons img:hover {
+        transform: scale(1.2);
+      }
+
+      section {
+        flex: 1;
+        margin-left: 20px;
+        background-color: #3a3434;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.4);
+        border: 5px white solid;
+        min-height: 80vh;
+        position: static;
+        top: 100px;
+        scroll-margin-top: 100px;
+      }
+
+      .content {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        gap: 20px;
+      }
+
+      .About {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        text-align: center;
+        padding: 50px;
+        box-sizing: border-box;
+        flex-wrap: wrap;
+      }
+
+      .about-content h1 {
+        font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+        font-size: 100px;
+        margin-bottom: 30px;
+        line-height: 1.2;
+      }
+
+      .about-content h1:hover {
+        color: #ff9800;
+        transition: 2s;
+        text-shadow: 2px 2px 10px white;
+      }
+
+      .about-content p {
+        font-family: "Roboto", sans-serif;
+        font-size: 30px;
+        line-height: 1.6;
+        max-width: 900px;
+      }
+
+      .about-content span {
+        color: #ff9800;
+        font-weight: bold;
+        text-decoration: underline 2px #ff9800;
+      }
+
+      .skills {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 50px 20px;
+      }
+
+      #Skills h2 {
+        color: #ff9800;
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 50px;
+      }
+
+      .skill {
+        margin-bottom: 40px;
+      }
+
+      .skill-name {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+        color: #fff;
+      }
+
+      .progress {
+        width: 100%;
+        height: 25px;
+        background: #222;
+        border-radius: 15px;
+        overflow: hidden;
+      }
+
+      .progress-bar {
+        height: 100%;
+        background: linear-gradient(90deg, #ff9800, #ffa733);
+        border-radius: 15px;
+        width: 0;
+        animation: fill 2s forwards;
+      }
+
+      .java {
+        animation-delay: 0.2s;
+        --target-width: 70%;
+      }
+
+      .python {
+        animation-delay: 0.4s;
+        --target-width: 60%;
+      }
+
+      .webdev {
+        animation-delay: 0.6s;
+        --target-width: 80%;
+      }
+
+      .design {
+        animation-delay: 0.8s;
+        --target-width: 90%;
+      }
+
+      @keyframes fill {
+        from {
+          width: 0;
+        }
+        to {
+          width: var(--target-width);
+        }
+      }
+
+      .Projects {
+        padding: 50px 20px;
+        color: white;
+        text-align: center;
+      }
+
+      .Projects h2 {
+        font-size: 40px;
+        color: #ff9800;
+        margin-bottom: 40px;
+      }
+
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+      }
+
+      .project-card {
+        background: #222;
+        border: 2px solid #ff9800;
+        padding: 25px;
+        border-radius: 15px;
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .project-card h3 {
+        font-size: 26px;
+        color: #ff9800;
+        margin-bottom: 15px;
+      }
+
+      .project-card p {
+        font-size: 16px;
+        margin-bottom: 20px;
+        color: #ddd;
+      }
+
+      .project-card a {
+        display: inline-block;
+        padding: 10px 20px;
+        background: #ff9800;
+        color: #000;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 8px;
+        transition: background 0.3s, transform 0.3s;
+      }
+
+      .project-card a:hover {
+        background: #ffa733;
+        transform: scale(1.05);
+      }
+
+      .project-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0px 8px 20px rgba(255, 152, 0, 0.4);
+      }
+
+      form {
+        border: 5px white solid;
+        padding: 5px;
+        color: #ff9800;
+        width: 50%;
+        height: 100%;
+        flex: 1;
+        max-width: 50%;
+      }
+      form input,
+      form textarea {
+        height: auto;
+        width: 100%;
+        padding: 20px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+
+      form input[type="button"] {
+        background-color: white;
+        color: black;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      form input[type="button"]:hover {
+        background-color: #ff9800;
+        color: #fff;
+      }
+
+      .Contact {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 40px;
+        padding: 20px;
+      }
+
+      .contact-info {
+        flex: 1;
+        max-width: 45%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 25px;
+        margin: 50px;
+      }
+
+      .contact-info .cont {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .contact-info img {
+        width: 50px;
+        height: 50px;
+      }
+
+      .contact-info h2 {
+        margin: 0;
+        color: #ff9800;
+        font-size: 18px;
+      }
+
+      .contact-info h3 {
+        margin: 0;
+        color: white;
+        font-size: 16px;
+        font-weight: normal;
+      }
+
+      .Footer {
+        background: none;
+        border: none;
+        box-shadow: none;
+        text-align: center;
+        color: #ff9800;
+        font-size: 12px;
+        padding: 5px 0;
+        margin: 0;
+      }
+      .Footer h3 {
+        margin: 0;
+        padding: 0;
+        font-weight: normal;
+        font-size: 12px;
+      }
+      @media (max-width: 768px) {
+        nav {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        nav div {
+          flex-wrap: wrap;
+          gap: 10px;
+          justify-content: center;
+        }
+
+        main {
+          flex-direction: column;
+          padding: 10px;
+        }
+
+        aside {
+          width: 100%;
+          max-height: none;
+          position: static;
+          margin-bottom: 20px;
+        }
+
+        section {
+          margin-left: 0;
+          padding: 15px;
+        }
+
+        .Contact {
+          flex-direction: column;
+          gap: 20px;
+          flex-wrap: wrap;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .contact-info {
+          width: 100%;
+          align-items: center;
+          text-align: center;
+        }
+
+        form {
+          width: 50%;
+        }
+
+        .photo {
+          height: 120px;
+          width: 120px;
+        }
+
+        .Footer {
+          font-size: 10px;
+          padding: 3px 0;
+        }
+        .about-content h1 {
+          font-size: 50px;
+        }
+        .about-content p {
+          font-size: 20px;
+        }
+        .projects-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      body *:not(.progress-bar) {
+        opacity: 0;
+        animation: fadeInUp 1s ease-out forwards;
+      }
+
+      @keyframes fadeInUp {
+        0% {
+          opacity: 0;
+          transform: translateY(2px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav>
+      <h1>M <span>||</span> R</h1>
+      <div>
+        <a href="#About">About Me</a>
+        <a href="#Skills">Skills</a>
+        <a href="#Projects">Projects</a>
+        <a href="#Contact">Contact</a>
+      </div>
+    </nav>
+    <main>
+      <aside>
+        <img class="photo" src="photo.jpeg" alt="Profile Photo" />
+        <h2>Manan Raythatha</h2>
+        <p>Student | Aspiring Developer</p>
+        <p>"Turning ideas into code 🚀"</p>
+        <div class="icons">
+          <a href="#"><img src="linkedin.png" alt="LinkedIn" /></a>
+          <a href="#"><img src="github.png" alt="GitHub" /></a>
+          <a href="#"><img src="gmail.png" alt="Email" /></a>
+        </div>
+        <a href="resume.pdf" download class="btn">Download Resume</a>
+      </aside>
+      <div class="content">
+        <section id="About" class="About">
+          <div class="about-content">
+            <h1>👋 Hey, I'm Manan</h1>
+            <p>
+              Every day is a new adventure — creating, learning, and exploring
+              new horizons while sharpening my tech skills 🚀.Beyond coding, I
+              dive into the world of
+              <span>GRAPHIC DESIGN</span> and soar through my love for
+              <span>AVIATION ✈️</span>.
+            </p>
+          </div>
+        </section>
+        <section id="Skills" class="Skills">
+          <h2>My Skills</h2>
+
+          <div class="skill">
+            <div class="skill-name">Java</div>
+            <div class="progress">
+              <div class="progress-bar java"></div>
+            </div>
+          </div>
+
+          <div class="skill">
+            <div class="skill-name">Python</div>
+            <div class="progress">
+              <div class="progress-bar python"></div>
+            </div>
+          </div>
+
+          <div class="skill">
+            <div class="skill-name">Web Development</div>
+            <div class="progress">
+              <div class="progress-bar webdev"></div>
+            </div>
+          </div>
+
+          <div class="skill">
+            <div class="skill-name">Graphic Design</div>
+            <div class="progress">
+              <div class="progress-bar design"></div>
+            </div>
+          </div>
+        </section>
+
+        <section id="Projects" class="Projects">
+          <h2>My Projects</h2>
+          <div class="projects-grid">
+            <div class="project-card">
+              <h3>Portfolio Website</h3>
+              <p>
+                A fully responsive personal portfolio showcasing my skills and
+                projects.
+              </p>
+              <a href="#" target="_blank">View Project</a>
+            </div>
+            <div class="project-card">
+              <h3>Ferris Wheel</h3>
+              <p>Real-time revolving ferris wheel.</p>
+              <a
+                href="https://github.com/MANANAR2007/WebDevAssignments/blob/main/ferris-wheel.html"
+                target="_blank"
+                >View Code</a
+              >
+              <a
+                href="http://127.0.0.1:5500/Assignments/ferris-wheel.html"
+                target="_blank"
+                >View Preview</a
+              >
+            </div>
+            <div class="project-card">
+              <h3>Earth and Moon</h3>
+              <p>A simple code to make the Moon revolve around Earth.</p>
+              <a
+                href="https://github.com/MANANAR2007/WebDevAssignments/blob/main/moon.html"
+                target="_blank"
+                >View Code</a
+              >
+              <a
+                href="http://127.0.0.1:5500/Assignments/moon.html"
+                target="_blank"
+                >View Preview</a
+              >
+            </div>
+            <div class="project-card">
+              <h3>Design Portfolio</h3>
+              <p>My best graphic design works and creative projects.</p>
+              <a
+                href="https://drive.google.com/drive/folders/1n15JVhkxPxudy0J-9sRF-0axMNwF6E_d?usp=sharing"
+                target="_blank"
+                >View Project</a
+              >
+            </div>
+          </div>
+        </section>
+
+        <section id="Contact" class="Contact">
+          <div class="contact-info">
+            <div class="cont">
+              <img src="gmail.png" alt="" />
+              <div>
+                <h2>Email</h2>
+                <h3>mananar2007@gmail.com</h3>
+              </div>
+            </div>
+            <div class="cont">
+              <img src="contact.png" alt="" />
+              <div>
+                <h2>Contact</h2>
+                <h3>+91 9008546318</h3>
+              </div>
+            </div>
+            <div class="cont">
+              <img src="location.png" alt="" />
+              <div>
+                <h2>Location</h2>
+                <h3>Bengaluru, Karnataka - 40</h3>
+              </div>
+            </div>
+          </div>
+
+          <form>
+            <h1>Contact Me !!</h1>
+            <label for="Name">Full Name:</label>
+            <input type="text" />
+            <br /><br />
+            <label for="Email">Email:</label>
+            <input type="email" name="email" id="email" />
+            <br /><br />
+            <label for="Subject">Subject:</label>
+            <input type="text" />
+            <br /><br />
+            <label for="Message">Message:</label>
+            <textarea></textarea>
+            <br /><br />
+            <input type="button" value="Submit" />
+          </form>
+        </section>
+      </div>
+    </main>
+    <footer class="Footer">
+      <h3>2025 @ALL RIGHTS RESERVED</h3>
+    </footer>
+  </body>
+</html>
